@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+//npm run dev    time 1.31
+
+html {
+  font-size: 20px;
+}
+
+body {
+  color: white;
+  background-color: darkslategrey;
+}
+
+main{  
+  min-height: 98rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+footer{  
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+.card-container {
+  margin: 1%;
+  flex: 1 0 20%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  perspective: 25rem;
+  cursor: pointer;
+
+  &:hover > .card {
+    transform: translateZ(2rem);
+    box-shadow: 0 .5rem 1 rem rgba(0,0,0,.5);
+  }
+
+}
+
+.card {
+  position: relative;
+  width: 10rem;
+  height: 12rem;
+  transform-style: preserve-3d;
+  transform-origin: right;
+  transition: all .5s;
+  border-radius: .5rem;
+  box-shadow: 0 0 .25rem black; 
+
+  &.flipped{
+    transform: rotateY(180deg) translateX(-100%);
+    transform-origin: left;    
+  }
+
+  &__front,
+  &__back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: inherit;
+  }
+
+
+  &__front {
+    background-color: crimson;
+  }
+
+  &__back {
+    background-color: gray;
+    background-image: url(./assets/card-back.png);
+    background-position: center;
+    background-size: cover;
+    transform: rotateY(180deg);
+    }
+  }
