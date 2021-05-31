@@ -1,11 +1,11 @@
 import './card.scss';
-import {BaseComponent} from "../base-component";
+import { BaseComponent } from "../base-component";
 
 const FLIP_CLASS = 'flipped';
 
-export class Card extends BaseComponent{
+export class Card extends BaseComponent {
     constructor(readonly image: string) {
-        super ('div',['card-container'] );
+        super('div', ['card-container']);
 
         this.element.innerHTML = `
         <div class="card">
@@ -16,14 +16,28 @@ export class Card extends BaseComponent{
 
     }
 
-    flipToBack(){
-        this.element.classList.add(FLIP_CLASS)        
-    }
-    flipToFront(){
-        this.element.classList.remove(FLIP_CLASS)        
+    flipToBack() {
+        return this.flip(true);
     }
 
+
+    flipToFront() {
+        return this.flip();
+    }
+
+
+    private flip(isFront = false): Promise<void> {
+        return new Promise((resolve) => {
+            this.element.classList.toggle(FLIP_CLASS, isFront)
+            this.element.addEventListener('transitionend', () => resolve(), {
+                once: true,
+            });
+        })
+    }
 }
 
 
-    
+
+
+
+
