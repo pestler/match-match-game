@@ -33,18 +33,20 @@ export class Game extends BaseComponent {
 
     private async cardHandler(card: Card) {
         if (this.isAnimation) return;
+        if (!card.isFlipped) return;
         this.isAnimation = true;
         await card.flipToFront();
 
 
         if (!this.activeCard) {
-            this.activeCard = card;
+            this.activeCard = card;            
+            this.isAnimation = false;
             return;
-        }
-
-        if (this.activeCard.image != card.image) {
-            await delay(FLIP_DELAY);            
-            await Promise.all([this.activeCard.flipToBack(), card.flipToBack()]);
+        } 
+            if (this.activeCard.image != card.image) {
+                await delay(FLIP_DELAY);            
+                await Promise.all([this.activeCard.flipToBack(), card.flipToBack()]);
+        
 
         }  
         this.activeCard = undefined;
