@@ -16,3 +16,4 @@ export class App {
         this.game.newGame(images);
     }
 }
+
